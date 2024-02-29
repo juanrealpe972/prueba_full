@@ -12,8 +12,7 @@ export const iniciarUser = async (req, res) => {
       });
       res
         .status(200)
-        .json({ message: "Usuario Autorizado", data: rows, token: token }),
-        res.cookie("token", token)
+        .json({ message: "Usuario Autorizado", data: rows, token: token });
     } else {
       res.status(404).json({ message: "Usuario no autorizado" });
     }
@@ -23,12 +22,13 @@ export const iniciarUser = async (req, res) => {
 };
 
 export const verificarUsuario = async (req, res) => {
+  const [rows] = await pool.query(`SELECT * FROM usuarios`);
   try {
-    const token = req.cookies;
-    const [rows] = await pool.query(`SELECT * FROM usuarios`);
-    if (!token) return res.status(404).json({ message: "No autorizado" });
+    const token_client = req.headers("token");
+    if (!token_client)
+      return res.status(404).json({ message: "token es requerido" });
     jwt.verify(token, process.env.AUT_SECRET, async (err) => {
-      if (err) return res.status(401).json({ message: "No autorizado" });
+      if (err) return res.status(401).json({ message: "token no autorizado" });
       res.status(200).json({ message: "El usuario es", data: rows });
     });
   } catch (error) {
