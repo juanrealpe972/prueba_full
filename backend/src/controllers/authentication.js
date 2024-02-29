@@ -31,7 +31,7 @@ export const verificarUsuario = async (req, res, next) => {
       const token = jwt.verify(
         token_client,
         process.env.AUT_SECRET,
-        async (error, decoded) => {
+        (error, decoded) => {
           if (error)
             return res.status(401).json({ message: "token no valido" });
           else {
