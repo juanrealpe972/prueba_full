@@ -1,0 +1,36 @@
+/* Estilos para el cuerpo */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 20px;
+}
+
+/* Estilos para los encabezados */
+h1 {
+  color: #333;
+  text-align: center;
+}
+
+h2 {
+  color: #555;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+/* Estilos para la tabla */
+table {
+  width: 40%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table td {
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Estilos para la respuesta JSON */
+table tr:last-child td {
+  white-space: pre-line;
+}
+
